@@ -6,27 +6,19 @@
 #include "magiccat.h"
 
 
-int main(int argc, char *argv[]) {
+int main(int argc, char * argv[]) {
 	printcat();
-	int containslinux = 0; //True if input string contains substring "linux"
 
-	int i;
-	for (i = 1; i < argc; i++) {
-		char lowercasearg[256];
-		strcpy(lowercasearg, argv[i]);
-		tolowercase(lowercasearg);
-		if (strstr(lowercasearg, "linux")) {
-			containslinux = 1;	
-		}
-	}
+	//Check if the input contains the phrase "linux"	
+	int containslinux = argvhaslinux(argc, argv);
 
+	//If it does, Our Lord Stallman will interject
 	if (containslinux) {
-		//Preach the way of the GNU
 		interject();
 	}
-
+	//Otherwise, just print the input as usual
 	else {
-		//Print all input arguments
+		int i;
 		for (i = 1; i < argc; i++) {
 			printf("%s%s", argv[i], " ");
 		}
@@ -53,4 +45,18 @@ void tolowercase(char * in) {
 	for(i = 0; in[i]; i++) {
   		in[i] = tolower(in[i]);
 	}
+}
+
+int argvhaslinux(int argc, char * argv[]) {
+	int containslinux = 0; //True if input string contains substring "linux"
+	int i;
+	for (i = 1; i < argc; i++) {
+		char lowercasearg[256];
+		strcpy(lowercasearg, argv[i]);
+		tolowercase(lowercasearg);
+		if (strstr(lowercasearg, "linux")) {
+			containslinux = 1;
+		}
+	}
+	return containslinux;
 }
