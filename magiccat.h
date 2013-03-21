@@ -9,5 +9,5 @@ void interject();
 //Lowercase an input mixed-case string
 void tolowercase(char * in);
 
-//If input contains substring "linux" or any case variant of it, return true
+//If input contains substring "linux" instead of "GNU/Linux", return 1
 int argvhaslinux(int argc, char * argv[]);
