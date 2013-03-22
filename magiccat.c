@@ -21,7 +21,6 @@
 #include <string.h>
 #include "magiccat.h"
 
-
 int main(int argc, char * argv[]) {
 	printcat();
 
@@ -32,7 +31,7 @@ int main(int argc, char * argv[]) {
 	if (containslinux) {
 		interject();
 	}
-	//Otherwise, just print the input as usual
+	//Otherwise, just print the user's input as usual
 	else {
 		int i;
 		for (i = 1; i < argc; i++) {
@@ -65,11 +64,14 @@ void tolowercase(char * in) {
 
 int argvhaslinux(int argc, char * argv[]) {
 	int containslinux = 0; //True if input string contains substring "linux"
+	char lowercasearg[6];
+
 	int i;
-	char lowercasearg[256];
 	for (i = 1; i < argc; i++) {
-		strcpy(lowercasearg, argv[i]);
+		strncpy(lowercasearg, argv[i], sizeof(lowercasearg));
+		lowercasearg[sizeof(lowercasearg) - 1] = '\0';
 		tolowercase(lowercasearg);
+
 		if (strstr(lowercasearg, "linux")) {
 			containslinux = 1;
 		}
@@ -77,5 +79,6 @@ int argvhaslinux(int argc, char * argv[]) {
 		if (strstr(lowercasearg, "gnu/"))
 			containslinux = 0;
 	}
+
 	return containslinux;
 }
